@@ -1,7 +1,7 @@
 {
   "name": "@cedarstudios/react-native-cedarmaps",
   "description": "CedarMaps native module for creating custom maps",
-  "version": "c6.1.2",
+  "version": "6.1.3",
   "author": "Sina Abadi",
   "main": "./javascript/index.js",
   "keywords": [
@@ -15,7 +15,7 @@
   "licenses": [
     {
       "type": "BSD",
-      "url": "https://github.com/mapbox/react-native-mapbox-gl/blob/master/LICENSE.md"
+      "url": "https://github.com/cedarstudios/react-native-mapbox-gl/blob/master/LICENSE.md"
     }
   ],
   "repository": {
