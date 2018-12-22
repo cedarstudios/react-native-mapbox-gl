@@ -30,8 +30,8 @@
 @property (nonatomic, assign) BOOL reactScrollEnabled;
 @property (nonatomic, assign) BOOL reactPitchEnabled;
 @property (nonatomic, assign) BOOL reactRotateEnabled;
-@property (nonatomic, assign) BOOL reactAttributionEnabled;
 @property (nonatomic, assign) BOOL reactLogoEnabled;
+@property (nonatomic, assign) BOOL reactAttributionEnabled;
 @property (nonatomic, assign) BOOL reactCompassEnabled;
 @property (nonatomic, assign) BOOL reactShowUserLocation;
 @property (nonatomic, assign) BOOL reactZoomEnabled;
