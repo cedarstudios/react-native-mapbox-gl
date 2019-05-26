@@ -1372,6 +1372,32 @@
         ]
       },
       {
+        "name": "getCoordinateFromView",
+        "docblock": "Converts a point in the given view’s coordinate system to a geographic coordinate.\n\n@example\nconst coordinate = await this._map.getCoordinateFromView([100, 100]);\n\n@param {Array<Number>} point - A point expressed in the given view’s coordinate system.\n@return {Array}",
+        "modifiers": [
+          "async"
+        ],
+        "params": [
+          {
+            "name": "point",
+            "description": "A point expressed in the given view’s coordinate system.",
+            "type": {
+              "name": "Array"
+            }
+          }
+        ],
+        "returns": {
+          "description": null,
+          "type": {
+            "name": "Array"
+          }
+        },
+        "description": "Converts a point in the given view’s coordinate system to a geographic coordinate.",
+        "examples": [
+          "\nconst coordinate = await this._map.getCoordinateFromView([100, 100]);\n\n"
+        ]
+      },
+      {
         "name": "getVisibleBounds",
         "docblock": "The coordinate bounds(ne, sw) visible in the users’s viewport.\n\n@example\nconst visibleBounds = await this._map.getVisibleBounds();\n\n@return {Array}",
         "modifiers": [
@@ -1694,6 +1720,15 @@
         "examples": [
           "\nconst center = await this._map.getCenter();\n\n"
         ]
+      },
+      {
+        "name": "showAttribution",
+        "docblock": "Show the attribution and telemetry action sheet.\nIf you implement a custom attribution button, you should add this action to the button.",
+        "modifiers": [],
+        "params": [],
+        "returns": null,
+        "description": "Show the attribution and telemetry action sheet.\nIf you implement a custom attribution button, you should add this action to the button.",
+        "examples": []
       }
     ],
     "props": [
@@ -1710,6 +1745,13 @@
         "type": "arrayOf",
         "default": "none",
         "description": "Initial center coordinate on map [lng, lat]"
+      },
+      {
+        "name": "visibleCoordinateBounds",
+        "required": false,
+        "type": "arrayOf",
+        "default": "none",
+        "description": "Initial bounds on map [[lng, lat], [lng, lat]]"
       },
       {
         "name": "showUserLocation",
@@ -1969,6 +2011,20 @@
         "type": "func",
         "default": "none",
         "description": "This event is triggered when the users tracking mode is changed."
+      },
+      {
+        "name": "regionWillChangeDebounceTime",
+        "required": false,
+        "type": "number",
+        "default": "10",
+        "description": "The emitted frequency of regionwillchange events"
+      },
+      {
+        "name": "regionDidChangeDebounceTime",
+        "required": false,
+        "type": "number",
+        "default": "500",
+        "description": "The emitted frequency of regiondidchange events"
       }
     ],
     "composes": [
@@ -2019,7 +2075,7 @@
         "name": "anchor",
         "required": false,
         "type": "shape",
-        "default": "{ x: 0.5, y: 0.5 }",
+        "default": "{x: 0.5, y: 0.5}",
         "description": "Specifies the anchor being set on a particular point of the annotation.\nThe anchor point is specified in the continuous space [0.0, 1.0] x [0.0, 1.0],\nwhere (0, 0) is the top-left corner of the image, and (1, 1) is the bottom-right corner.\nNote this is only for custom annotations not the default pin view.\nDefaults to the center of the view."
       },
       {

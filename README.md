@@ -1,10 +1,6 @@
-<a href="https://www.mapbox.com">
-  <img src="/assets/mapbox_logo.png" width="500"/>
-</a>
-
 # Mapbox Maps SDK for React Native
 
-_An official React Native component for building maps with the [Mapbox Maps SDK for iOS](https://www.mapbox.com/ios-sdk/) and [Mapbox Maps SDK for Android](https://www.mapbox.com/android-sdk/)_
+_An unofficial React Native component for building maps with the [Mapbox Maps SDK for iOS](https://www.mapbox.com/ios-sdk/) and [Mapbox Maps SDK for Android](https://www.mapbox.com/android-sdk/)_
 
 [![npm version](https://badge.fury.io/js/%40mapbox%2Freact-native-mapbox-gl.svg)](https://badge.fury.io/js/%40mapbox%2Freact-native-mapbox-gl)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fmapbox%2Freact-native-mapbox-gl.svg?type=shield)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fmapbox%2Freact-native-mapbox-gl?ref=badge_shield)
@@ -19,6 +15,7 @@ Not a Mapbox user yet? [Sign up for an account here](https://www.mapbox.com/sign
 
 
 ## Installation
+🛑 NB: The current release `6.1.4` is not up on NPM. You have to get the master version from github. 🛑
 
 **Dependencies**
 
@@ -34,12 +31,12 @@ cd react-native-mapbox-gl
 
 **Yarn**
 ```
-yarn add @mapbox/react-native-mapbox-gl
+yarn add https://github.com/nitaliano/react-native-mapbox-gl#master
 ```
 
 **Npm**
 ```
-npm install @mapbox/react-native-mapbox-gl --save
+npm install https://github.com/nitaliano/react-native-mapbox-gl/tarball/master
 ```
 
 ## Installation Guides

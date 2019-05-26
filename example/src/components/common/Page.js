@@ -1,11 +1,11 @@
 import React from 'react';
-import { View } from 'react-native';
-
-import BaseExamplePropTypes from './BaseExamplePropTypes';
-import MapHeader from './MapHeader';
+import {View} from 'react-native';
 
 import sheet from '../../styles/sheet';
 import colors from '../../styles/colors';
+
+import BaseExamplePropTypes from './BaseExamplePropTypes';
+import MapHeader from './MapHeader';
 
 class Page extends React.Component {
   static propTypes = {
@@ -16,7 +16,6 @@ class Page extends React.Component {
     return (
       <View style={sheet.matchParent}>
         <MapHeader
-          relative
           backgroundColor={colors.primary.pink}
           statusBarColor={colors.primary.pinkDark}
           statusBarTextTheme={'light-content'}

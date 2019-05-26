@@ -80,6 +80,7 @@ RCT_REMAP_VIEW_PROPERTY(zoomEnabled, reactZoomEnabled, BOOL)
 
 RCT_REMAP_VIEW_PROPERTY(contentInset, reactContentInset, NSArray)
 RCT_REMAP_VIEW_PROPERTY(centerCoordinate, reactCenterCoordinate, NSString)
+RCT_REMAP_VIEW_PROPERTY(visibleCoordinateBounds, reactVisibleCoordinateBounds, NSString)
 RCT_REMAP_VIEW_PROPERTY(styleURL, reactStyleURL, NSString)
 
 RCT_REMAP_VIEW_PROPERTY(userTrackingMode, reactUserTrackingMode, int)
@@ -322,6 +323,24 @@ RCT_EXPORT_METHOD(setCamera:(nonnull NSNumber*)reactTag
     }];
 }
 
+RCT_EXPORT_METHOD(showAttribution:(nonnull NSNumber *)reactTag
+                  resolver:(RCTPromiseResolveBlock)resolve
+                  rejecter:(RCTPromiseRejectBlock)reject)
+{
+    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager, NSDictionary<NSNumber*, UIView*> *viewRegistry) {
+        id view = viewRegistry[reactTag];
+        
+        if (![view isKindOfClass:[RCTMGLMapView class]]) {
+            RCTLogError(@"Invalid react tag, could not find RCTMGLMapView");
+            return;
+        }
+        
+        __weak RCTMGLMapView *reactMapView = (RCTMGLMapView*)view;
+        [reactMapView showAttribution:reactMapView];
+        resolve(nil);
+    }];
+}
+
 #pragma mark - UIGestureRecognizers
 
 - (void)didTapMap:(UITapGestureRecognizer *)recognizer
@@ -485,7 +504,8 @@ RCT_EXPORT_METHOD(setCamera:(nonnull NSNumber*)reactTag
 
 - (void)mapViewRegionIsChanging:(MGLMapView *)mapView
 {
-    [self reactMapDidChange:mapView eventType:RCT_MAPBOX_REGION_IS_CHANGING];
+    NSDictionary *payload = [self _makeRegionPayload:mapView animated:false];
+    [self reactMapDidChange:mapView eventType:RCT_MAPBOX_REGION_IS_CHANGING andPayload:payload];
 }
 
 - (void)mapView:(MGLMapView *)mapView regionDidChangeWithReason:(MGLCameraChangeReason)reason animated:(BOOL)animated

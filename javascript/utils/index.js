@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   ViewPropTypes,
   View,
@@ -7,8 +6,19 @@ import {
   findNodeHandle,
   Platform,
 } from 'react-native';
-
 import resolveAssetSource from 'react-native/Libraries/Image/resolveAssetSource';
+
+function getAndroidManagerInstance(module) {
+  const haveViewManagerConfig =
+    NativeModules.UIManager && NativeModules.UIManager.getViewManagerConfig;
+  return haveViewManagerConfig
+    ? NativeModules.UIManager.getViewManagerConfig(module)
+    : NativeModules.UIManager[module];
+}
+
+function getIosManagerInstance(module) {
+  return NativeModules[getIOSModuleName(module)];
+}
 
 export const viewPropTypes = ViewPropTypes || View.props;
 
@@ -47,8 +57,9 @@ export function runNativeCommand(module, name, nativeRef, args = []) {
   }
 
   const managerInstance = isAndroid()
-    ? NativeModules.UIManager[module]
-    : NativeModules[getIOSModuleName(module)];
+    ? getAndroidManagerInstance(module)
+    : getIosManagerInstance(module);
+
   if (!managerInstance) {
     throw new Error(`Could not find ${module}`);
   }
@@ -65,16 +76,18 @@ export function runNativeCommand(module, name, nativeRef, args = []) {
 }
 
 export function cloneReactChildrenWithProps(children, propsToAdd = {}) {
-  if (!children) {
-    return null;
-  }
+  if (!children) return null;
+
+  let foundChildren = null;
 
   if (!Array.isArray(children)) {
-    children = [children];
+    foundChildren = [children];
+  } else {
+    foundChildren = children;
   }
 
-  const filteredChildren = children.filter((child) => !!child); // filter out falsy children, since some can be null
-  return React.Children.map(filteredChildren, (child) =>
+  const filteredChildren = foundChildren.filter(child => !!child); // filter out falsy children, since some can be null
+  return React.Children.map(filteredChildren, child =>
     React.cloneElement(child, propsToAdd),
   );
 }

@@ -45,6 +45,10 @@
         rawValue = [RCTMGLUtils toColor:rawValue];
     } else if ([self.type isEqualToString:@"translate"]) {
         rawValue = [NSValue valueWithCGVector:[RCTMGLUtils toCGVector:rawValue]];
+    } else if ([self.type isEqualToString:@"enum"]) {
+        // ensure we pass through values as NSUInteger when mapping to an MGL enum
+        NSUInteger uintValue = [(NSNumber*)rawValue unsignedIntegerValue];
+        rawValue = [NSValue value:&uintValue withObjCType:@encode(NSUInteger)];
     }
 
     // check for overrides that handle special cases like NSArray vs CGVector
@@ -52,6 +56,8 @@
     if (iosTypeOverride != nil) {
         if ([iosTypeOverride isEqual:@"vector"]) {
             rawValue = [NSValue valueWithCGVector:[RCTMGLUtils toCGVector:rawValue]];
+        } else if ([iosTypeOverride isEqual:@"edgeinsets"]){
+            rawValue = [NSValue valueWithUIEdgeInsets:[RCTMGLUtils toUIEdgeInsets:rawValue]];
         }
     }
     

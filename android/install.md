@@ -27,14 +27,18 @@ Add project under `dependencies`
 
 ```
 dependencies {
-    compile project(':mapbox-react-native-mapbox-gl')
+    implementation project(':mapbox-react-native-mapbox-gl')
 }
 ```
 
-Update Android SDK version if you did `react-native init`, we want to be on `26` or higher.
-* `compileSdkVersion 26`
-* `buildToolsVersion "26.0.1"`
+Update Android SDK version if you did `react-native init`, we want to be on `28` or higher.
+* `compileSdkVersion 28`
+* `buildToolsVersion "28.0.3"`
 * `targetSdkVersion 26`
+
+You can also set the Support Library version or the okhttp version as well if you use other modules that depend on them:
+* `supportLibVersion "28.0.0"`
+* `okhttpVersion "3.12.1"`
 
 ### settings.gradle
 
